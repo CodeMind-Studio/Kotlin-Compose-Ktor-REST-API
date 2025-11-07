@@ -1,4 +1,4 @@
-package org.codemindstudio.classnetworking.modals
+package org.codemindstudio.classnetworking.modals.get
 
 
 import kotlinx.serialization.SerialName
