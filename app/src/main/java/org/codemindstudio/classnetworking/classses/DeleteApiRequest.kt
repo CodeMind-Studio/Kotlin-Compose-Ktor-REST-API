@@ -1,6 +1,5 @@
-package org.codemindstudio.classnetworking.classses.post
+package org.codemindstudio.classnetworking.classses
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,11 +23,13 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.delete
 import io.ktor.client.request.header
-import io.ktor.client.request.post
+import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 import org.codemindstudio.classnetworking.modals.post.AddProductRequest
 import org.codemindstudio.classnetworking.modals.post.AddProductResponse
 import org.codemindstudio.classnetworking.modals.post.Data
@@ -64,8 +65,10 @@ import org.codemindstudio.classnetworking.modals.post.Data
 
 
 
+
+
 @Composable
-fun ADDDeviceUI() {
+fun DeleteDeviceUI() {
 
 
     var isLoading by remember { mutableStateOf(false) }
@@ -85,38 +88,20 @@ fun ADDDeviceUI() {
 
 
     Box(Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.align(Alignment.TopCenter)) {
-            TextField(value = productName, onValueChange = { productName = it }, label = {
-                Text(
-                    text = "Product Name"
-                )
-            })
-        }
+
         Button(modifier = Modifier
             .align(Alignment.BottomCenter)
             .padding(18.dp), onClick = {
             isLoading = true
-            val productToAddRequest = AddProductRequest(
-                name = productName,
-                data = Data(
-                    cPUModel = "M10 Pro Max",
-                    year = 2029,
-                    price = 10.00,
-                    hardDiskSize = "100TB Memory"
-                )
-            )
             scope.launch {
-                val response = client.post("https://api.restful-api.dev/objects") {
-                    header("Content-Type", "application/json")
-                    setBody(productToAddRequest)
-                }.body<AddProductResponse>()
+                val response = client.delete("https://api.restful-api.dev/objects/ff8081819782e69e019a620f63b10a7c").body<DeleteApiRequestResponse>()
 
                 isLoading = false
                 responseMsg =
-                    "The Product Added in Server and the Generated id is ${response.id} and the date & time is ${response.createdAt} and Data is ${response.data}"
+                    "The Product Deleted from Server"
             }
         }) {
-            Text("Add Data To Server")
+            Text("Delete Object Data from Server")
         }
 
         if (isLoading) {
@@ -131,7 +116,12 @@ fun ADDDeviceUI() {
         }
     }
 
-   // Toast.makeText(context, responseMsg, Toast.LENGTH_LONG).show()
+    // Toast.makeText(context, responseMsg, Toast.LENGTH_LONG).show()
 
 
 }
+
+@Serializable
+data class DeleteApiRequestResponse(
+    val message : String = ""
+)

@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import org.codemindstudio.classnetworking.classses.DeleteDeviceUI
 import org.codemindstudio.classnetworking.classses.get.ProductsUI
+import org.codemindstudio.classnetworking.classses.patch.PatchDeviceUI
 import org.codemindstudio.classnetworking.classses.post.ADDDeviceUI
+import org.codemindstudio.classnetworking.classses.put.UpdateDeviceUI
+import org.codemindstudio.classnetworking.sample_app.ShowAllProductsUI
 import org.codemindstudio.classnetworking.ui.theme.ClassNetworkingTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     containerColor = Color.White
                 ) { innerPadding ->
                     Box(Modifier.padding(innerPadding)) {
-                        ADDDeviceUI()
+                        ShowAllProductsUI()
                     }
                 }
             }

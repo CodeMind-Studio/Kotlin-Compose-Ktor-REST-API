@@ -39,5 +39,6 @@ data class AddProductResponse(
     @SerialName("name")
     val name: String = "",
     val id: String = "",
-    val createdAt: String = ""
+    val createdAt: String = "",
+    val updatedAt: String = "",
 )

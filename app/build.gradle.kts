@@ -61,6 +61,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
     implementation("io.ktor:ktor-client-core:3.3.1")
     implementation("io.ktor:ktor-client-cio:3.3.1")
     implementation("io.ktor:ktor-client-content-negotiation:3.3.1")
